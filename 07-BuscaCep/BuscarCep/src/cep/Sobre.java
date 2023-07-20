@@ -86,7 +86,7 @@ public class Sobre extends JDialog {
 		JButton btnGitHub = new JButton("");
 		btnGitHub.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				link("https://github.com/Clairtonlm/My_Desafios_Java/blob/main/README.md");
+				link("https://github.com/Clairtonlm/My_Desafios_Java");
 			}
 		});
 		btnGitHub.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
