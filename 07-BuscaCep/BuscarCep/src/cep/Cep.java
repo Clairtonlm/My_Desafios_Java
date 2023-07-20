@@ -126,6 +126,12 @@ public class Cep extends JFrame {
 		contentPane.add(btnCep);
 
 		JButton btnSobre = new JButton("");
+		btnSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sobre sobre = new Sobre();
+				sobre.setVisible(true);
+			}
+		});
 		btnSobre.setToolTipText("Sobre");
 		btnSobre.setIcon(new ImageIcon(Cep.class.getResource("/img/about.png")));
 		btnSobre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

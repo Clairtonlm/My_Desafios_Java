@@ -1,14 +1,20 @@
 package cep;
 
-import java.awt.EventQueue;
-
-import javax.swing.JDialog;
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import java.awt.SystemColor;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.net.URI;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class Sobre extends JDialog {
@@ -34,11 +40,12 @@ public class Sobre extends JDialog {
 	 * Create the dialog.
 	 */
 	public Sobre() {
+		setModal(true);
 		getContentPane().setForeground(SystemColor.textHighlight);
 		setResizable(false);
 		setTitle("Sobre");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/home.png")));
-		setBounds(100, 100, 450, 300);
+		setBounds(150, 150, 511, 374);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Buscar CEP - Ver 1.0");
@@ -53,25 +60,58 @@ public class Sobre extends JDialog {
 		lblNewLabel_2.setBounds(43, 131, 88, 14);
 		getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("republicavirtual.com.br");
-		lblNewLabel_3.setForeground(SystemColor.textHighlight);
-		lblNewLabel_3.setBounds(128, 131, 196, 14);
-		getContentPane().add(lblNewLabel_3);
+		JLabel lblWebService = new JLabel("republicavirtual.com.br");
+		lblWebService.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				link("https://republicavirtual.com.br/");
+			}
+		});
+		lblWebService.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblWebService.setForeground(SystemColor.textHighlight);
+		lblWebService.setBounds(128, 131, 196, 14);
+		getContentPane().add(lblWebService);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon(Sobre.class.getResource("/img/linkedin.png")));
-		btnNewButton_1.setBounds(254, 189, 89, 38);
-		getContentPane().add(btnNewButton_1);
+		JButton btnLinkedin = new JButton("");
+		btnLinkedin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link("https://www.linkedin.com/in/clairton-lima-4913ab205/");
+			}
+		});
+		btnLinkedin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLinkedin.setIcon(new ImageIcon(Sobre.class.getResource("/img/linkedin.png")));
+		btnLinkedin.setBounds(254, 189, 89, 38);
+		getContentPane().add(btnLinkedin);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setToolTipText("");
-		btnNewButton.setIcon(new ImageIcon(Sobre.class.getResource("/img/github.png")));
-		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(SystemColor.control);
-		btnNewButton.setBounds(43, 197, 89, 23);
-		getContentPane().add(btnNewButton);
+		JButton btnGitHub = new JButton("");
+		btnGitHub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link("https://github.com/Clairtonlm/My_Desafios_Java/blob/main/README.md");
+			}
+		});
+		btnGitHub.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGitHub.setToolTipText("");
+		btnGitHub.setIcon(new ImageIcon(Sobre.class.getResource("/img/github.png")));
+		btnGitHub.setBorder(null);
+		btnGitHub.setBackground(SystemColor.control);
+		btnGitHub.setBounds(43, 197, 89, 23);
+		getContentPane().add(btnGitHub);
+		
+		
+		
+		
 
-	}
+	}//fim construtor
+	
+	//metodo para abri links externo no navegador
+			private void link(String site) {
+				Desktop desktop = Desktop.getDesktop();
+				try {
+					URI uri = new URI(site);
+					desktop.browse(uri);
+				}catch(Exception e) {
+					System.out.println(e);
+				}
+			}
 
 }
